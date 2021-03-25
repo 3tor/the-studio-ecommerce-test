@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+<style>
+    .img-thumbnail { border-radius: 5em;}
+</style>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 ml-md-auto">
+      <div class="">
+        <div class="card bg-light mb-3 mt-5" style="width: 800px;">
+          <div class="card-body">
+           <div class="card-header mb-3">Profile</div>
+           <div class="text-center">    
+                <img src="{{asset('images/default-users.svg')}}" class="img-thumbnail mb-4" alt="Default profile pic">
+                <h5>{{user.firstname}} {{user.lastname}}</h5>
+                <span>{{user.phone}} | {{user.email}}</span>
+                <h5>{{user.address}}</h5>
+           </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
