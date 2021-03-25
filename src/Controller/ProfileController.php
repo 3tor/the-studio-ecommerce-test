@@ -31,7 +31,7 @@ class ProfileController extends AbstractController
 
 
     /**
-     * @Route("/{id}/edit", name="profile.edit")
+     * @Route("/{id}/edit", name="profile_edit")
      */
     public function edit(Request $request, User $user): Response
     {

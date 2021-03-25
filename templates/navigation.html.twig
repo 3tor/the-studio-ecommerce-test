@@ -20,10 +20,10 @@
                 Admin
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" href="{{path('users')}}">Users</a>
+                <a class="dropdown-item" href="#">Products</a>
+                <a class="dropdown-item" href="#">Categories</a>
+                <a class="dropdown-item" href="#">Orders</a>
                 </div>
             </li>
             {% endif %}
@@ -35,7 +35,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="/logout">Logout</a>
                 <a class="dropdown-item" href="{{path('profile',{'id': app.user.id})}}">View Profile</a>
-                <a class="dropdown-item" href="{{path('profile.edit',{'id': app.user.id})}}">Update Profile</a>
+                <a class="dropdown-item" href="{{path('profile_edit',{'id': app.user.id})}}">Update Profile</a>
                 </div>
             </li>
             {% endif %}
