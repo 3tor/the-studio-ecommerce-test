@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category Details{% endblock %}
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 ml-md-auto">
+      <div class="pt-4">
+        {% if is_granted('ROLE_SUPERADMIN') %}
+        <a href="{{path('categories')}}">Back to Categories</a>
+        {% endif %}
+        <div class="card bg-light mb-3 mt-5" style="width: 800px;">
+          <div class="card-body">
+           <div class="card-header mb-3">Category Details</div>
+           <div class="text-center">    
+                <h5>{{category.name}}</h5>
+           </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
