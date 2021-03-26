@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Products{% endblock %}
+
+{% block body %}
+<style>
+    .img-fluid { height: 3em;}
+</style>
+<div class="container">
+    <a href="{{path('product_new')}}" class="btn btn-primary mt-4">Add New Product</a>
+    <div class="card mt-4">
+        <div class="card-header">
+            Products
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Category</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</th>
+                    <td><img src="{{ asset('uploads/products/' ~ product.image) }}" class="img-fluid" alt="..."></td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.stock }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.category.name }}</td>
+                    <td>
+                        <a href="{{path('product_show',{'id':product.id})}}">View |</a>
+                        <a href="{{path('product_edit',{'id':product.id})}}">Edit |</a> 
+                        <form class="d-inline" method="post" action="{{ path('product_delete', {'id': product.id}) }}" onsubmit="return confirm('Are you sure you want to delete this category?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id) }}">
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center">No records found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product Details{% endblock %}
+
+{% block body %}
+<style>
+    .img-thumbnail { height: 14em;}
+</style>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 ml-md-auto">
+      <div class="pt-4">
+        {% if is_granted('ROLE_SUPERADMIN') %}
+        <a href="{{path('products')}}">Back to Products</a>
+        {% endif %}
+        <div class="card bg-light mb-3 mt-5" style="width: 800px;">
+          <div class="card-body">
+           <div class="card-header mb-3">Product Details</div>
+           <div class="text-center">    
+                <img src="{{ asset('uploads/products/' ~ product.image) }}" class="img-thumbnail mb-4" alt="Product pic">
+                <h5>Name: {{product.name}}</h5>
+                <h5>Category: {{product.category.name}}</h5>
+                <p>Description: {{product.description}} </p>
+                <span>Stock: {{product.stock}} |</span>
+                <span>Price: {{product.price}}</span>
+           </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
