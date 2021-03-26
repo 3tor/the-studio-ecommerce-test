@@ -47,4 +47,12 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findStockedProducts()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.stock > :val')
+            ->setParameter('val', 0)
+            ->getQuery()->getResult();
+    }
 }

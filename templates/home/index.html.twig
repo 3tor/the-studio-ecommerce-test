@@ -1,20 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Flex Shop!{% endblock %}
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .custom-footer {border-top: 1px solid #eee;padding: 15px;}
+    .custom-footer span {font-size:1.5em}
 </style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/ecommerce/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/ecommerce/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
+<div class="container">
+    <div class="row">
+        <aside class="col-sm-3 mt-4">
+            <div class="card">
+                <div class="card-header">
+                    Featured Categories
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><a href="/" class="active"> All Categories </a></li>
+                    {% for category in categories %}
+                    <li class="list-group-item"><a href="">{{category.name}}</a></li>
+                    {% else %}
+                    <li class="list-group-item">No records found</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </aside>
+        <main class="col-sm-9">
+        <div class="row">
+            {% for product in products %}
+            <div class="col-4 mt-4">
+                <div class="card">
+                    <img src="{{ asset('uploads/products/' ~ product.image) }}" class="card-img-top" alt="product image" style="height:10em;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text">{{product.description}}</p>
+                    </div>
+                    <div class="custom-footer">
+                        <span>${{product.price}}</span>
+                        <a href="#" class="btn btn-primary float-right">Details</a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <h3>No products in stock at the moment</h3>
+            {% endfor %}
+        </div>
+            
+        </main>
+    </div>
 </div>
 {% endblock %}
