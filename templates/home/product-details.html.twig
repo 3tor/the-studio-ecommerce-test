@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Flex Shop!{% endblock %}
+
+{% block body %}
+<style> 
+    .price {color: #ffc107; font-size: 1.75em;}
+</style>
+<div class="container">
+    <div class="row mt-5">
+     <div class="col-6">
+        <img src="{{ asset('uploads/products/' ~ product.image) }}" class="img-thumbnail" alt="product image">
+     </div>
+     <div class="col-6">
+        <h3>{{product.name}}</h3>
+        <span class="price">${{product.price}}</span>
+        <h6 class="mt-3">Description</h6>
+        <p>{{product.description}}</p>
+        <div>
+            <span class="badge badge-success py-2">{{product.category.name}}</span>
+        </div>
+        <hr/>
+        <a class="btn btn-primary ">Add to cart</a>
+     </div>
+    </div>
+</div>
+{% endblock %}
