@@ -35,7 +35,7 @@
                         {# <p class="card-text">{{product.description}}</p> #}
                     </div>
                     <div class="custom-footer">
-                        <span>${{product.price}}</span>
+                        <span>${{product.price|number_format(2)}}</span>
                         <a href="{{path('product_details',{'id':product.id})}}" class="btn btn-primary float-right">Details</a>
                     </div>
                 </div>
