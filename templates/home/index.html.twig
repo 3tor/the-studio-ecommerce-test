@@ -15,9 +15,9 @@
                     Featured Categories
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="/" class="active"> All Categories </a></li>
+                    <li class="list-group-item"><a href="{{path('home',{'category': 'all'})}}" class="active"> All Categories </a></li>
                     {% for category in categories %}
-                    <li class="list-group-item"><a href="">{{category.name}}</a></li>
+                    <li class="list-group-item"><a href="{{path('home',{'category': category.name})}}">{{category.name}}</a></li>
                     {% else %}
                     <li class="list-group-item">No records found</li>
                     {% endfor %}

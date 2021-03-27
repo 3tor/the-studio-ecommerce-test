@@ -55,4 +55,14 @@ class ProductRepository extends ServiceEntityRepository
             ->setParameter('val', 0)
             ->getQuery()->getResult();
     }
+
+    public function findFilteredProducts($category_id)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.stock > :val')
+            ->andWhere('p.category = :category_id')
+            ->setParameter('val', 0)
+            ->setParameter('category_id', $category_id)
+            ->getQuery()->getResult();
+    }
 }
