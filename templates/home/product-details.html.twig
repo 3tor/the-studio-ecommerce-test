@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row mt-5">
      <div class="col-6">
-        <img src="{{ asset('uploads/products/' ~ product.image) }}" class="img-thumbnail" alt="product image">
+        <img src="{{ asset('uploads/products/' ~ product.image) }}" class="img-thumbnail" alt="{{product.name}}">
      </div>
      <div class="col-6">
         <h3>{{product.name}}</h3>
@@ -20,7 +20,21 @@
             <span class="badge badge-success py-2">{{product.category.name}}</span>
         </div>
         <hr/>
-        <a class="btn btn-primary ">Add to cart</a>
+        {# <a class="btn btn-primary ">Add to cart</a> #}
+        {{ form_start(form, {'attr': {'class': 'mt-4'}}) }}
+        <div class="form-group">
+            {{ form_label(form.quantity) }}
+            {{ form_widget(form.quantity, {
+                'attr': {
+                    'class': 'form-control ' ~ (form.quantity.vars.valid ? '' : 'is-invalid')
+                }
+            }) }}
+            <div class="invalid-feedback">
+                {{ form_errors(form.quantity) }}
+            </div>
+        </div>
+        {{ form_widget(form.add, {'attr': {'class': 'btn btn-primary'}}) }}
+        {{ form_end(form) }}
      </div>
     </div>
 </div>

@@ -10,6 +10,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Product;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
+use App\Form\AddToCartFormType;
+use App\Service\CartManager;
 
 class HomeController extends AbstractController
 {
@@ -35,10 +37,25 @@ class HomeController extends AbstractController
     /**
      * @Route("/product/details/{id}", name="product_details")
      */
-    public function show(Product $product): Response
+    public function show(Product $product, Request $request, CartManager $cartManager): Response
     {
+        $form = $this->createForm(AddToCartFormType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $item = $form->getData();
+            $item->setProduct($product);
+
+            $cart = $cartManager->addItem($item)->setUpdatedAt(new \DateTime());
+
+            $cartManager->save($cart);
+
+            return $this->redirectToRoute('product_details', ['id' => $product->getId()]);
+        }
         return $this->render('home/product-details.html.twig', [
-            'product' => $product
+            'product' => $product,
+            'form' => $form->createView()
         ]);
     }
 }
