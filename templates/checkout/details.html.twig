@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Checkout Details{% endblock %}
+
+{% block body %}
+   <div class="container">
+    <div class="row">
+        <div class="col-md-10 ml-md-auto">
+        <div class="">
+        <a href="{{path('cart')}}">Back to my cart</a>
+            <div class="card bg-light mb-3 mt-5" style="width: 800px;">
+            <div class="card-body">
+                <div class="card-header mb-3">Provide Details Here</div>
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                 <div class="invalid-feedback">
+                    {{ form_errors(form.firstname) }}
+                </div>
+                 <div class="invalid-feedback">
+                    {{ form_errors(form.lastname) }}
+                </div>
+                 <div class="invalid-feedback">
+                    {{ form_errors(form.phone) }}
+                </div>
+                 <div class="invalid-feedback">
+                    {{ form_errors(form.address) }}
+                </div>    
+                {{ form_end(form) }}
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

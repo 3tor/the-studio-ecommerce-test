@@ -1,21 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Cart{% endblock %}
+{% block title %}Checkout{% endblock %}
 
 {% block body %}
     <div class="container mt-4">
         <h1>Your Cart</h1>
-        {% if cart.items.count > 0 %}
             <div class="row mt-4">
                 <!-- List of items -->
-                <div class="col-md-8">
+                <div class="col-md-6">
                     {{ form_start(form) }}
                     <div class="card">
-                        <div class="card-header bg-dark text-white d-flex">
+                        <div class="card-header bg-light d-flex">
                             <h5>Items</h5>
                             <div class="ml-auto">
-                                {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
-                                {{ form_widget(form.clear, {'attr': {'class': 'btn btn-light'}}) }}
+                                {{ form_widget(form.order, {'attr': {'class': 'btn btn-success'}}) }}
                             </div>
                         </div>
                         <ul class="list-group list-group-flush">
@@ -46,30 +44,34 @@
                                     </div>
                                 </li>
                             {% endfor %}
-                        </ul>
-                    </div>
-                    {{ form_end(form) }}
-                </div>
-                <!-- Summary -->
-                <div class="col-md-4">
-                    <div class="card mt-4 mt-md-0">
-                        <h5 class="card-header bg-dark text-white">Summary</h5>
-                        <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between">
                                 <div><b>Total</b></div>
                                 <span><b>${{ cart.total|number_format(2) }}</b></span>
                             </li>
                         </ul>
-                        <div class="card-body">
-                            <a href="{{path('checkout')}}" class="btn btn-primary w-100">Checkout</a>
-                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+                <!-- Summary -->
+                <div class="col-md-6">
+                    <div class="card mt-4 mt-md-0">
+                        <h5 class="card-header bg-light">User Details</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between">
+                                <div><b>Name</b></div>
+                                <span><b>{{cart.firstname}} {{cart.lastname}}</b></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <div><b>Phone</b></div>
+                                <span><b>{{cart.phone}}</b></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <div><b>Address</b></div>
+                                <span><b>{{cart.address}}</b></span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        {% else %}
-            <div class="alert alert-info">
-                Your cart is empty. Go to the <a href="{{ path('home') }}">product list</a>.
-            </div>
-        {% endif %}
     </div>
 {% endblock %}
