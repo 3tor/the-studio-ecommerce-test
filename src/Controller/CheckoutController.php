@@ -31,12 +31,6 @@ class CheckoutController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $cart->setUpdatedAt(new \DateTime());
             $cart->setStatus($cart::STATUS_ORDERED);
-            if ($this->getUser()) {
-                $cart->setFirstname($this->getUser()->getFirstname());
-                $cart->setLastname($this->getUser()->getLastname());
-                $cart->setPhone($this->getUser()->getPhone());
-                $cart->setAddress($this->getUser()->getAddress());
-            }
             $cartManager->saveOrder($cart);
 
             return $this->redirectToRoute('cart');

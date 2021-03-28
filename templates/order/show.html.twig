@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Orders{% endblock %}
+
+{% block body %}
+<style>
+    .img-fluid { height: 3em;}
+</style>
+<div class="container">
+    <a href="{{path('orders')}}">Back to Orders</a>
+    <div class="card mt-4">
+        <div class="card-header">
+            Order Details
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.items %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td><img src="{{ asset('uploads/products/' ~ item.product.image) }}" class="img-fluid" alt="{{item.product.name}}"></td>
+                    <td>${{ item.product.price|number_format(2) }}</td>
+                    <td>{{ item.quantity }}</td>
+                </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center">No records found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

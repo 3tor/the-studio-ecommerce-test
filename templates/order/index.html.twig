@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Orders{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="card mt-4">
+        <div class="card-header">
+            Orders
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">Lastname</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Address</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</th>
+                    <td>{{ order.firstname }}</td>
+                    <td>{{ order.lastname }}</td>
+                    <td>{{ order.phone }}</td>
+                    <td>{{ order.address }}</td>
+                    <td>
+                        <a href="{{path('order_details',{'id':order.id})}}">View Details</a> 
+                    </td>
+                </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center">No records found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

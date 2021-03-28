@@ -17,6 +17,14 @@ use App\Service\CartManager;
 class HomeController extends AbstractController
 {
     /**
+     * @Route("/", name="landing")
+     */
+    public function landing()
+    {
+        return $this->redirectToRoute('home');
+    }
+
+    /**
      * @Route("/home/{category?}", name="home")
      */
     public function index(Request $request, CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
@@ -56,6 +64,13 @@ class HomeController extends AbstractController
                 $em->persist($current_cart);
                 $em->flush();
                 $cartManager->setSessionCart($current_cart);
+            }
+            if ($this->getUser()) {
+                $current_cart->setFirstname($this->getUser()->getFirstname());
+                $current_cart->setLastname($this->getUser()->getLastname());
+                $current_cart->setPhone($this->getUser()->getPhone());
+                $current_cart->setAddress($this->getUser()->getAddress());
+                $em->persist($current_cart);
             }
             $item->setProduct($product);
             $cart = $cartManager->addItem($item)->setUpdatedAt(new \DateTime());
