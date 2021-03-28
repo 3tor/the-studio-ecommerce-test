@@ -19,22 +19,10 @@ class ProductFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array(
-                'required' => true,
-                'attr' => array('class' => 'form-control mb-3')
-            ))
-            ->add('price', TextType::class, array(
-                'required' => true,
-                'attr' => array('class' => 'form-control mb-3')
-            ))
-            ->add('description', TextType::class, array(
-                'required' => true,
-                'attr' => array('class' => 'form-control mb-3')
-            ))
-            ->add('stock', IntegerType::class, array(
-                'required' => true,
-                'attr' => array('class' => 'form-control mb-3')
-            ))
+            ->add('name')
+            ->add('price')
+            ->add('description')
+            ->add('stock')
             ->add('image', FileType::class, [
                 'attr' => array('class' => 'form-control mb-3'),
                 'mapped' => false,
