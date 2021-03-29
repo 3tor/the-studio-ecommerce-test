@@ -40,7 +40,7 @@ class Category
     private $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="category_id", orphanRemoval=false)
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="category", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $products;
 
