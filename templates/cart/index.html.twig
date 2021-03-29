@@ -5,6 +5,14 @@
 {% block body %}
     <div class="container mt-4">
         <h1>Your Cart</h1>
+         {% for message in app.flashes('notice') %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{ message }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
         {% if cart.items.count > 0 %}
             <div class="row mt-4">
                 <!-- List of items -->
@@ -40,6 +48,9 @@
                                             </div>
                                             {{ form_widget(item.remove, {'attr': {'class': 'btn btn-danger btn-sm'}}) }}
                                         </div>
+                                    </div>
+                                     <div class="flex-fill mr-2">
+                                        <span>Qty in stock:<b>{{item.vars.data.product.stock}}</b></span>
                                     </div>
                                     <div class="flex-fill mr-2 text-right">
                                         <b>${{ item.vars.data.product.price|number_format(2) }}</b>

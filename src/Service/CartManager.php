@@ -134,13 +134,29 @@ class CartManager
      * Persists the cart in database and session.
      *
      * @param Order $cart
+     * 
+     * @return bool
      */
-    public function saveOrder(Order $cart): void
+    public function saveOrder(Order $cart): bool
     {
+        foreach ($this->getItems() as $item) {
+            if (!($item->getProduct()->getStock() >= $item->getQuantity())) {
+                return false;
+            }
+        }
+        foreach ($this->getItems() as $item) {
+            $latest_quantity =  $item->getProduct()->getStock() - $item->getQuantity();
+            $product = $item->getProduct();
+            $product->setStock($latest_quantity);
+            $this->entityManager->persist($product);
+        }
         // Persist in database
+        $cart->setUpdatedAt(new \DateTime());
+        $cart->setStatus($cart::STATUS_ORDERED);
         $this->entityManager->persist($cart);
         $this->entityManager->flush();
         // Persist in session
         $this->cartSessionStorage->setCart($cart);
+        return true;
     }
 }

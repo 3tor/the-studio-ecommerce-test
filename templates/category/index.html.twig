@@ -5,6 +5,14 @@
 {% block body %}
 <div class="container">
     <a href="{{path('category_new')}}" class="btn btn-primary mt-4">Add New Category</a>
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
     <div class="card mt-4">
         <div class="card-header">
             Categories

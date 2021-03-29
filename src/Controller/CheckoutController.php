@@ -29,10 +29,13 @@ class CheckoutController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $cart->setUpdatedAt(new \DateTime());
-            $cart->setStatus($cart::STATUS_ORDERED);
-            $cartManager->saveOrder($cart);
 
+            $result = $cartManager->saveOrder($cart);
+            if ($result) {
+                $this->addFlash('notice', 'Order placed successfully! Thanks!');
+            } else {
+                $this->addFlash('notice', 'Quantity ordered is more that quantity in stock! Thanks!');
+            }
             return $this->redirectToRoute('cart');
         }
 

@@ -19,6 +19,9 @@
         <div>
             <span class="badge badge-success py-2">{{product.category.name}}</span>
         </div>
+        <div class="mt-3">
+            <span>Quantity in stock: <b>{{product.stock}}</b></span>
+        </div>
         <hr/>
         {# <a class="btn btn-primary ">Add to cart</a> #}
         {{ form_start(form, {'attr': {'class': 'mt-4'}}) }}
