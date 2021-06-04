@@ -40,7 +40,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $random = random_bytes(10);
             $user->setPassword($passwordEncoder->encodePassword($user, $random));
-
+            $user->setRoles($form->get('roles')->getData());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -62,6 +62,7 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setRoles($form->get('roles')->getData());
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('users');
